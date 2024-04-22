@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas | Project</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <section class="tools-board">
+        <div class="row">
+          <label class="title"> Shapes </label>
+          <ul class="options">
+            <li class="option" id="drawing-circle">
+              <img src="./img/circle.svg" alt="" />
+              <span>Circle</span>
+            </li>
+            <li class="option" id="drawing-rectangle">
+              <img src="./img/rectangle.svg" alt="" />
+              <span>Rectangle</span>
+            </li>
+          </ul>
+        </div>
+        <div class="row">
+          <label class="title"> Options </label>
+          <ul class="options">
+            <li class="eraseBtn option">
+              <img src="./img/eraser.svg" alt="" />
+              <span>Eraser</span>
+            </li>
+            <li class="option">
+              <input type="checkbox" id="fill-color" />
+              <label for="fill-color"> Fill Color </label>
+            </li>
+
+              <li class="option">
+                <img src="./img/color.svg" width="15" alt="">
+                <span class="margin">Color</span>
+                <input type="color" class="colorBtn" id="color-picker" />
+              </li>
+            <li class="option" id="drawing-line">
+              <img src="./img/pen.svg" alt="" />
+              <span>Pen</span>
+            </li>
+            <li class="option" id="drawing-Straightline">
+              <img src="./img/horizontal-line.svg" width="13" alt="" />
+              <span>Straight Line</span>
+            </li>
+            <li class="option undoBtn">
+              <img src="./img/undo.svg" width="13" alt="" />
+              <span>Undo</span>
+            </li>
+            <li class="option redoBtn">
+              <img src="./img/redo.svg" width="13" alt="" />
+              <span>Redo</span>
+            </li>
+            <li class="">
+              <input
+                type="range"
+                min="1"
+                max="50"
+                value="10"
+                class="rangeBtn"
+              />
+              <p class="penSize option">
+                <span> Pen width : 10px</span>
+              </p>
+            </li>
+            <li class="" id="styleBtn">
+              <input
+                class="StyleBtn"
+                type="radio"
+                id="round"
+                name="StyleBtn"
+                value="round"
+              />
+
+              <label for="round">Round</label> <br />
+              <input
+                class="StyleBtn"
+                type="radio"
+                id="square"
+                name="StyleBtn"
+                value="square"
+                checked
+              />
+              <label for="square">Square</label>
+            </li>
+          </ul>
+        </div>
+
+        <div class="row buttons">
+          <button class="clearBtn clear-canvas">Clear</button>
+          <button class="save-img">Save as image</button>
+        </div>
+      </section>
+      <section class="drawing-board">
+        <canvas width="900" height="700"></canvas>
+      </section>
+    </div>
+  </body>
+  <script src="./canvas-common.js" type="text/javascript"></script>
+  <script src="./drawing-line.js" type="text/javascript"></script>
+  <script src="./drawing-Straightline.js" type="text/javascript"></script>
+  <script src="./drawing-rectangle.js" type="text/javascript"></script>
+  <script src="./drawing-circle.js" type="text/javascript"></script>
+  <script src="./fillColor.js" type="text/javascript"></script>
+  <script src="./eraser.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+      currentFunction = new DrawingLine(ctx);
+
+      document
+        .querySelector("#drawing-rectangle")
+        .addEventListener("click", function () {
+          currentFunction = new DrawingRectangle(ctx);
+        });
+
+      document
+        .querySelector("#drawing-circle")
+        .addEventListener("click", function () {
+          currentFunction = new DrawingCircle(ctx);
+        });
+
+      document
+        .querySelector("#drawing-line")
+        .addEventListener("click", function () {
+          currentFunction = new DrawingLine(ctx);
+        });
+
+      document
+        .querySelector(".eraseBtn")
+        .addEventListener("click", function () {
+          console.log(`eraser click`);
+          currentFunction = new Eraser(ctx);
+        });
+
+      document
+        .querySelector("#drawing-Straightline")
+        .addEventListener("click", function () {
+          currentFunction = new DrawingStraightline(ctx);
+        });
+
+      // document.querySelector(".fillBtn").addEventListener("click", function () {
+      //   currentFunction = new FillColor(ctx);
+      // });
+    });
+  </script>
+</html>
